@@ -1,13 +1,12 @@
 name:                EarleyM
 version:             0.1.0.0
-synopsis:            Monadic Earley Parsing
-description:         Monadic combinators for Earley Parsing
-homepage:            https://github.com/Nick-Chapman/EarleyM
+synopsis:            "Monadic Earley Parsing"
+description:         "Monadic combinators for Earley Parsing"
+homepage:            "https://github.com/Nick-Chapman/EarleyM"
 license:             BSD3
-author:              Nick Chapman
-maintainer:          nic@amadido.co.uk
+author:              "Nick Chapman"
+maintainer:          "nic@amadido.co.uk"
 category:            Parsing
-github:              https://github.com/Nick-Chapman/EarleyM.git
 
 extra-source-files:
 - README.md
