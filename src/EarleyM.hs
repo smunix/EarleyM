@@ -20,6 +20,7 @@ module EarleyM
     referenceNT,
     declare,
     produce,
+    (-->),
     fix,
 
     -- * Parsing
