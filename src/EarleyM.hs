@@ -98,7 +98,7 @@ some :: Gram a -> Gram [a]
 some g = (:) <$> g <*> many g
 
 optional :: Gram a -> Gram (Maybe a)
-optional p = alts [p <&> Just, eps $> Nothing]
+optional p = alts [p <&> Just, epsilon $> Nothing]
 
 -- | Kleene '*' which ignores the synthesized value.
 --  @ skipWhile p == do _ <- many p; return () @
