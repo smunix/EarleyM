@@ -11,8 +11,16 @@ module EarleyM
     Gram,
     alts,
     fail,
+    epsilon,
     many,
+    some,
+    skip,
     skipWhile,
+    bracket,
+    between,
+    optional,
+    sepBy,
+    sepBy1,
     Lang,
     getToken,
     NT,
@@ -37,6 +45,7 @@ where
 
 import Control.Applicative (Alternative, empty, (<|>))
 import Control.Monad (MonadPlus, ap, liftM)
+import Data.Functor
 import Data.HMap (HKey, HMap)
 import qualified Data.HMap as HMap
 import Data.Map (Map)
@@ -85,10 +94,32 @@ many g = many_g
   where
     many_g = alts [return [], do x <- g; xs <- many_g; return (x : xs)]
 
+some :: Gram a -> Gram [a]
+some g = (:) <$> g <*> many g
+
+optional :: Gram a -> Gram (Maybe a)
+optional p = alts [p <&> Just, eps $> Nothing]
+
 -- | Kleene '*' which ignores the synthesized value.
 --  @ skipWhile p == do _ <- many p; return () @
 skipWhile :: Gram () -> Gram ()
 skipWhile p = do _ <- many p; return ()
+
+epsilon :: Gram ()
+epsilon = return ()
+
+skip :: Gram a -> Gram ()
+skip p = p >> epsilon
+
+sepBy, sepBy1 :: Gram a -> Gram _sep -> Gram [a]
+p `sepBy1` sep = (:) <$> p <*> many (sep >> p)
+p `sepBy` sep = alts [p `sepBy1` sep, p <&> return]
+
+bracket :: Gram _bra -> Gram a -> Gram _ket -> Gram a
+bracket bra p ket = bra *> p <* ket
+
+between :: Gram a -> Gram _enclosingMark -> Gram a
+p `between` sym = bracket sym p sym
 
 -- | Type of non-terminals. LHS of a production rules. Carrying values of type 'a'.
 data NT a = forall x. NT String (HKey x (StateValue a)) -- TODO: add 2nd key into rules
