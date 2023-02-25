@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:EarleyM"
+
+    - path: "examples"
+      component: "EarleyM:test:EarleyM-test"
+
+    - path: "test"
+      component: "EarleyM:test:EarleyM-test"
