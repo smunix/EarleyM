@@ -7,7 +7,21 @@ license:             BSD3
 author:              Nick Chapman
 maintainer:          nic@amadido.co.uk
 category:            Parsing
-github:              https://github.com/Nick-Chapman/EarleyM.git
+github:              Nick-Chapman/EarleyM
+
+default-extensions:
+  - BlockArguments
+  - LambdaCase
+  - DataKinds
+  # - OverloadedLists
+  - OverloadedStrings
+  - TemplateHaskell
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - UnicodeSyntax
+  - ViewPatterns
+
 
 extra-source-files:
 - README.md

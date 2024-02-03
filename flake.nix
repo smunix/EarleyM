@@ -34,6 +34,7 @@
             ];
             extension = hf: hp:
               with hf; {
+                hpack = hp.hpack_0_36_0;
                 EarleyM =
                   callCabal2nix "EarleyM" (filter { root = inputs.self; }) { };
               };
@@ -46,11 +47,12 @@
                 with pkgs; [
                   cracklib
                   git
-                  hpack
+                  # hpack
                   fourmolu
                   (ghcWithPackages (p:
                     with p; [
                       haskell-language-server
+                      hpack
                       implicit-hie
                       EarleyM
                     ]))

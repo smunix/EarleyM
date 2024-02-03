@@ -1,9 +1,6 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TupleSections       #-}
-
 module Example.FunctionalLanguage (tests) where
 
-import Control.Monad
+import Control.Monad hiding (fail)
 import qualified Data.Char as Char
 import EarleyM
 import Prelude hiding (exp, fail, pred)
